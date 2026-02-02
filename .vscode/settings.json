@@ -1,0 +1,74 @@
+{
+    // Python Configuration
+    "python.defaultInterpreterPath": "/home/jalloh/miniconda3/envs/fyp_env/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    // Auto-activate fyp_env in integrated terminal
+    "terminal.integrated.env.linux": {
+        "CONDA_DEFAULT_ENV": "fyp_env"
+    },
+    "terminal.integrated.shellArgs.linux": [
+        "-c",
+        "eval \"$(conda shell.bash hook)\" && mamba activate fyp_env && exec bash"
+    ],
+    // Python Testing
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    // Linting & Formatting
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.banditEnabled": true,
+    "python.linting.mypyEnabled": true,
+    // Format on save
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    // isort configuration
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    // Files to exclude from explorer
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/.pytest_cache": true,
+        "**/.mypy_cache": true,
+        "**/venv": true,
+        "**/*.egg-info": true
+    },
+    // Search exclusions
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/venv": true,
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/.mypy_cache": true
+    },
+    // Editor settings
+    "editor.rulers": [
+        100
+    ],
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    // Git
+    "git.ignoreLimitWarning": true,
+    // Django
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    // Docker
+    "docker.defaultRegistryPath": "${env:AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com",
+    // Workspace recommendations
+    "extensions.ignoreRecommendations": false
+}

@@ -1,226 +1,908 @@
 # ALX Project Nexus 🚀
+## Movie Recommendation Backend - Capstone Project
 
-## Overview
-Welcome to **ALX Project Nexus** - a comprehensive documentation hub showcasing my journey through the **ProDev Backend Engineering Program**. This repository serves as a central knowledge base for the key concepts, technologies, and best practices I've mastered throughout this intensive backend development program.
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-4.2+-green.svg)](https://www.djangoproject.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-blue.svg)](https://www.postgresql.org/)
+[![Redis](https://img.shields.io/badge/Redis-7.0+-red.svg)](https://redis.io/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-Ready-blue.svg)](https://kubernetes.io/)
+[![AWS](https://img.shields.io/badge/AWS-EKS-orange.svg)](https://aws.amazon.com/eks/)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-Jenkins-red.svg)](https://www.jenkins.io/)
+[![Terraform](https://img.shields.io/badge/IaC-Terraform-purple.svg)](https://www.terraform.io/)
 
-The ProDev Backend Engineering program is designed to transform aspiring developers into proficient backend engineers capable of building scalable, robust, and efficient server-side applications. Through hands-on projects and real-world scenarios, this program covers the essential tools and methodologies required in modern backend development.
+## 📖 Executive Summary
 
----
+**ALX Project Nexus** is a production-grade **Movie Recommendation Backend** built as the capstone project for the **ALX ProDev Backend Engineering Program**. This project demonstrates mastery of modern backend development practices, from API design and database optimization to containerization, caching strategies, and automated deployment pipelines.
 
-## 🎯 Program Objectives
-- Master backend development fundamentals and advanced concepts
-- Build production-ready APIs and microservices
-- Implement industry-standard best practices
-- Develop collaborative coding skills
-- Deploy and maintain scalable applications
+The application provides personalized movie recommendations using **TMDb API** integration, implements sophisticated caching mechanisms, handles user authentication securely, and showcases industry-standard development workflows including **test-driven development**, **CI/CD automation**, and **containerized deployment**.
 
----
+### 🎯 Project Objectives
+- Build a scalable, production-ready movie recommendation REST API
+- Demonstrate comprehensive backend engineering best practices
+- Implement complete DevOps workflow (Docker, CI/CD, monitoring)
+- Apply performance optimization techniques (caching, query optimization)
+- Create maintainable, well-documented, and thoroughly tested code
+- Collaborate with frontend developers for seamless integration
 
-## 💻 Key Technologies Covered
-
-### **Python**
-- Core language for backend development
-- Object-oriented programming principles
-- Advanced Python features and libraries
-- Writing clean, maintainable, and pythonic code
-
-### **Django**
-- Full-featured web framework for rapid development
-- Model-View-Template (MVT) architecture
-- Django ORM for database interactions
-- Authentication, authorization, and security
-- Admin interface and middleware
-
-### **REST APIs**
-- RESTful architecture principles
-- HTTP methods and status codes
-- API design best practices
-- Django REST Framework (DRF)
-- Serialization and validation
-- Authentication methods (Token, JWT, OAuth)
-
-### **GraphQL**
-- Modern alternative to REST APIs
-- Schema definition and type system
-- Queries, mutations, and subscriptions
-- Resolvers and data loaders
-- Integration with Django using Graphene
-
-### **Docker**
-- Containerization concepts
-- Creating Dockerfiles
-- Docker Compose for multi-container applications
-- Container orchestration basics
-- Development and production environments
-
-### **CI/CD (Continuous Integration/Continuous Deployment)**
-- Automated testing pipelines
-- GitHub Actions and GitLab CI
-- Deployment automation
-- Code quality checks
-- Version control best practices
+### 🎬 What This Project Delivers
+A fully functional backend system that:
+- Fetches and serves trending/recommended movies via TMDb integration
+- Provides secure user authentication and preference management
+- Implements intelligent caching for optimal performance
+- Offers comprehensive API documentation via Swagger/OpenAPI
+- Runs in containerized environments (Docker)
+- Includes automated testing and deployment pipelines
+- Follows professional Git workflows and code quality standards
 
 ---
 
-## 🧠 Important Backend Development Concepts
+## � Technology Stack
 
-### **Database Design**
-- **Relational Database Modeling**: Understanding entities, relationships, and normalization
-- **Schema Design**: Creating efficient table structures with proper indexing
-- **Query Optimization**: Writing efficient SQL queries and using Django ORM effectively
-- **Migrations**: Managing database schema changes safely
-- **Data Integrity**: Implementing constraints, transactions, and ACID principles
-- **PostgreSQL & MySQL**: Working with popular relational databases
+### **Backend Framework**
+- **Python 3.10+**: Modern Python with type hints and performance improvements
+- **Django 4.2+**: High-level web framework for rapid, secure development
+- **Django REST Framework (DRF)**: Powerful toolkit for building Web APIs
 
-### **Asynchronous Programming**
-- **Async/Await Patterns**: Understanding Python's asyncio library
-- **Concurrent Processing**: Managing multiple tasks simultaneously
-- **Celery**: Distributed task queue for background jobs
-- **Message Brokers**: Redis and RabbitMQ for task management
-- **WebSockets**: Real-time bidirectional communication
-- **Performance Benefits**: Non-blocking I/O operations for scalability
+### **Database & Caching**
+- **PostgreSQL 15+**: Primary relational database for data persistence
+- **Redis 7.0+**: In-memory data store for caching and session management
+- **Django ORM**: Database abstraction layer with query optimization
 
-### **Caching Strategies**
-- **Cache Layers**: Application-level, database query, and CDN caching
-- **Redis**: In-memory data structure store for caching
-- **Cache Invalidation**: Strategies for keeping data fresh
+### **External APIs & Integration**
+- **TMDb API**: The Movie Database API for movie data and metadata
+- **Requests**: HTTP library for API integration
+- **python-decouple**: Environment variable management
+
+### **Authentication & Security**
+- **JWT (JSON Web Tokens)**: Stateless authentication mechanism
+- **Django Rest Framework SimpleJWT**: JWT implementation for DRF
+- **CORS Headers**: Cross-Origin Resource Sharing configuration
+
+### **Performance & Background Tasks**
+- **Redis**: Caching layer for trending/recommended movies
+- **Celery** (Future): Distributed task queue for background processing
 - **Django Cache Framework**: Built-in caching mechanisms
-- **Performance Optimization**: Reducing database load and response times
-- **Cache Patterns**: Write-through, write-back, and cache-aside strategies
+
+### **API Documentation**
+- **drf-spectacular**: OpenAPI 3.0 schema generation
+- **Swagger UI**: Interactive API documentation
+- **ReDoc**: Alternative API documentation interface
+
+### **Testing & Quality Assurance**
+- **pytest**: Modern testing framework
+- **pytest-django**: Django plugin for pytest
+- **pytest-cov**: Code coverage reporting
+- **Factory Boy**: Test fixtures and factories
+- **Faker**: Generate fake test data
+
+### **Code Quality Tools**
+- **Black**: Opinionated code formatter
+- **isort**: Import statement organizer
+- **Flake8**: Style guide enforcement
+- **pylint**: Comprehensive code analyzer
+- **mypy**: Static type checker
+- **pre-commit**: Git hooks for automated checks
+
+### **Containerization & Orchestration**
+- **Docker**: Container platform for consistent environments
+- **Docker Compose**: Multi-container local development
+- **Kubernetes (EKS)**: Container orchestration on AWS
+- **Kustomize**: Environment-specific Kubernetes configurations
+- **Nginx/Gunicorn**: Production web server stack
+
+### **Cloud Infrastructure (AWS)**
+- **Amazon EKS**: Managed Kubernetes cluster
+- **Amazon RDS PostgreSQL**: Managed database (Multi-AZ)
+- **Amazon ElastiCache Redis**: Managed caching layer
+- **Amazon S3**: Static file storage
+- **Amazon CloudFront**: Content Delivery Network
+- **Amazon ECR**: Docker container registry
+- **AWS Secrets Manager**: Centralized secret management
+- **Terraform**: Infrastructure as Code for AWS resources
+
+### **CI/CD & DevOps**
+- **Jenkins**: Automated CI/CD pipeline
+- **GitFlow**: Branching model (master, develop, feature/*)
+- **Git Hooks**: Automated code quality enforcement
+- **Trivy**: Container vulnerability scanning
+- **External Secrets Operator**: K8s secrets sync with AWS
+
+### **Development Tools**
+- **VS Code**: Primary IDE with Python extensions
+- **Postman**: API testing and development
+- **pgAdmin**: PostgreSQL database management
+- **Redis Commander**: Redis data visualization
 
 ---
 
-## 🚧 Challenges Faced and Solutions Implemented
+## � Development Phases & Roadmap
 
-### **Challenge 1: Complex Database Relationships**
-**Problem**: Managing many-to-many relationships and avoiding N+1 query problems in Django ORM.
+This project follows an iterative, phase-based approach to ensure quality, maintainability, and comprehensive learning outcomes. Each phase builds upon the previous one, introducing new concepts and best practices.
 
-**Solution**: 
-- Utilized `select_related()` and `prefetch_related()` for query optimization
-- Implemented proper indexing on foreign key fields
-- Used Django Debug Toolbar to identify and fix inefficient queries
+### **Phase 0: Project Setup & Foundation** ✅ *Current Phase*
+**Timeline**: Week 1  
+**Objectives**: Establish project infrastructure and development environment
+- [x] Repository initialization with comprehensive README
+- [x] Git workflow setup (branching strategy, commit conventions)
+- [ ] Docker environment configuration (docker-compose.yml)
+- [ ] Python dependencies management (requirements.txt, virtual environment)
+- [ ] Project directory structure
+- [ ] Environment variable management (.env.example)
+- [ ] Initial CI/CD pipeline (linting, formatting checks)
+- [ ] Documentation structure (docs/ folder)
 
-### **Challenge 2: API Performance Under Load**
-**Problem**: API endpoints becoming slow with increased traffic and data volume.
-
-**Solution**:
-- Implemented Redis caching for frequently accessed data
-- Added pagination to limit response sizes
-- Used database query optimization techniques
-- Implemented connection pooling for database connections
-
-### **Challenge 3: Asynchronous Task Management**
-**Problem**: Long-running tasks blocking HTTP requests and degrading user experience.
-
-**Solution**:
-- Integrated Celery with Redis as the message broker
-- Moved email sending, report generation, and data processing to background tasks
-- Implemented task monitoring and error handling
-- Set up periodic tasks using Celery Beat
-
-### **Challenge 4: Docker Container Configuration**
-**Problem**: Inconsistencies between development and production environments.
-
-**Solution**:
-- Created separate Dockerfile configurations for dev and prod
-- Used Docker Compose for local development with all services
-- Implemented environment variable management with .env files
-- Set up volume mounting for live code reloading during development
-
-### **Challenge 5: API Security and Authentication**
-**Problem**: Ensuring secure access to API endpoints while maintaining good UX.
-
-**Solution**:
-- Implemented JWT token-based authentication
-- Added rate limiting to prevent abuse
-- Used HTTPS for all production traffic
-- Implemented proper CORS policies
-- Added input validation and sanitization
+**Deliverables**: 
+- Fully configured development environment
+- Docker Compose setup with PostgreSQL and Redis
+- Pre-commit hooks for code quality
+- CI pipeline running basic checks
 
 ---
 
-## ✨ Best Practices and Personal Takeaways
+### **Phase 1: Core API Development** 🚧 *Starting Soon*
+**Timeline**: Week 2-3  
+**Objectives**: Build foundational Django application and TMDb integration
 
-### **Code Quality**
-- **Write Clean Code**: Follow PEP 8 style guide for Python
-- **DRY Principle**: Don't Repeat Yourself - create reusable components
-- **Code Reviews**: Regular peer reviews improve code quality
-- **Documentation**: Write clear docstrings and maintain updated README files
-- **Type Hints**: Use Python type annotations for better code clarity
+**Tasks**:
+- [ ] Django project initialization
+- [ ] Database models (Movie, Genre, User, Favorite)
+- [ ] TMDb API integration service
+- [ ] Basic REST API endpoints:
+  - `GET /api/movies/trending/`
+  - `GET /api/movies/{id}/`
+  - `GET /api/genres/`
+- [ ] Serializers and ViewSets (DRF)
+- [ ] Error handling and validation
+- [ ] Unit tests for models and services
+- [ ] API tests for endpoints
 
-### **Testing**
-- **Test-Driven Development (TDD)**: Write tests before implementation
-- **Unit Tests**: Test individual components in isolation
-- **Integration Tests**: Verify components work together correctly
-- **API Testing**: Use tools like Postman and pytest for API validation
-- **Coverage**: Aim for high test coverage (80%+ minimum)
+**Best Practices**:
+- Test-Driven Development (write tests first)
+- Django ORM query optimization
+- Service layer pattern for business logic
+- Comprehensive error handling
 
-### **Version Control**
-- **Meaningful Commits**: Write descriptive commit messages
-- **Feature Branches**: Use Git flow for organized development
-- **Pull Requests**: Code review before merging to main branch
-- **Semantic Versioning**: Version releases properly (MAJOR.MINOR.PATCH)
-
-### **API Design**
-- **Consistent Naming**: Use clear, predictable endpoint names
-- **Proper HTTP Methods**: GET, POST, PUT, PATCH, DELETE used correctly
-- **Status Codes**: Return appropriate HTTP status codes
-- **Versioning**: Version APIs to maintain backward compatibility
-- **Documentation**: Use tools like Swagger/OpenAPI for API docs
-
-### **Database Management**
-- **Migrations**: Always create and test migrations before deployment
-- **Backups**: Regular database backups are essential
-- **Indexing**: Index frequently queried fields
-- **Connection Pooling**: Reuse database connections efficiently
-
-### **Security**
-- **Never Commit Secrets**: Use environment variables for sensitive data
-- **Input Validation**: Always validate and sanitize user input
-- **Authentication & Authorization**: Implement proper access controls
-- **HTTPS**: Always use secure connections in production
-- **Regular Updates**: Keep dependencies updated to patch vulnerabilities
-
-### **Key Personal Takeaways**
-1. **Scalability First**: Design with growth in mind from the start
-2. **Documentation Matters**: Well-documented code saves countless hours
-3. **Collaboration is Key**: Backend and frontend teams must communicate effectively
-4. **Performance Optimization**: Profile before optimizing - measure, don't guess
-5. **Continuous Learning**: Backend development evolves rapidly; stay updated
-6. **Error Handling**: Graceful error handling improves user experience significantly
-7. **Monitoring**: Implement logging and monitoring from day one
+**Git Workflow**:
+```
+feat: initialize Django project with movie app
+feat: add Movie and Genre models with migrations
+feat: integrate TMDb API service
+feat: implement trending movies endpoint
+test: add unit tests for Movie model
+docs: document TMDb integration
+```
 
 ---
 
-## 🤝 Collaboration
+### **Phase 2: Authentication & User Management** ⏳ *Planned*
+**Timeline**: Week 4  
+**Objectives**: Implement secure user authentication and preference management
 
-This project emphasizes collaboration between:
-- **ProDev Backend Learners**: For knowledge sharing and peer learning
-- **ProDev Frontend Learners**: For seamless API integration and full-stack development
+**Tasks**:
+- [ ] User registration and login endpoints
+- [ ] JWT token authentication (SimpleJWT)
+- [ ] User profile management
+- [ ] Favorite movies functionality
+  - `POST /api/users/favorites/`
+  - `GET /api/users/favorites/`
+  - `DELETE /api/users/favorites/{id}/`
+- [ ] Permissions and authorization
+- [ ] Password reset functionality
+- [ ] Integration tests for auth flow
 
-### Connect with Us
-Join the **Discord Channel**: `#ProDevProjectNexus`
-- Share ideas and ask questions
-- Coordinate on frontend-backend integration
-- Stay updated with program announcements
-- Organize study and coding sessions
+**Security Measures**:
+- Password hashing (Django default: PBKDF2)
+- JWT token rotation and refresh
+- Rate limiting on auth endpoints
+- CORS configuration
+- Input sanitization
+
+---
+
+### **Phase 3: Recommendation Engine & Caching** ⏳ *Planned*
+**Timeline**: Week 5-6  
+**Objectives**: Build personalized recommendations with performance optimization
+
+**Tasks**:
+- [ ] Recommendation algorithm implementation
+  - Content-based filtering (genre, ratings)
+  - User preference analysis
+- [ ] Recommendation endpoints:
+  - `GET /api/recommendations/`
+  - `GET /api/recommendations/personalized/`
+- [ ] Redis caching implementation
+  - Cache trending movies (TTL: 1 hour)
+  - Cache user recommendations (TTL: 30 minutes)
+  - Cache invalidation strategies
+- [ ] Performance benchmarking
+- [ ] Load testing with locust/pytest-benchmark
+
+**Performance Targets**:
+- API response time < 200ms (with cache)
+- Support 100 concurrent users
+- Cache hit ratio > 80%
+
+---
+
+### **Phase 4: API Documentation & Testing** ⏳ *Planned*
+**Timeline**: Week 7  
+**Objectives**: Comprehensive documentation and test coverage
+
+**Tasks**:
+- [ ] OpenAPI/Swagger integration (drf-spectacular)
+- [ ] Interactive API documentation at `/api/docs/`
+- [ ] Comprehensive test suite:
+  - Unit tests (>90% coverage)
+  - Integration tests
+  - API endpoint tests
+  - Performance tests
+- [ ] Test fixtures and factories (Factory Boy)
+- [ ] Continuous integration enhancements
+- [ ] Code coverage reporting
+
+**Documentation**:
+- API endpoint documentation
+- Authentication guide
+- Error response schemas
+- Rate limiting details
+- Example requests/responses
+
+---
+
+### **Phase 5: Advanced Features & Optimization** ⏳ *Planned*
+**Timeline**: Week 8  
+**Objectives**: Add advanced features and optimize for production
+
+**Tasks**:
+- [ ] Search functionality with filters
+- [ ] Pagination optimization
+- [ ] Database query optimization
+  - select_related / prefetch_related
+  - Database indexing
+  - Query analysis
+- [ ] Background tasks (Celery - optional)
+  - TMDb data sync
+  - Email notifications
+- [ ] Logging and monitoring setup
+- [ ] Admin panel customization
+
+---
+
+### **Phase 6: Deployment & DevOps** ✅ *Complete*
+**Timeline**: Week 9-10  
+**Objectives**: Production deployment with GitFlow, Jenkins, Kubernetes, and AWS
+
+**Infrastructure**:
+- ✅ GitFlow branching model with automated git hooks
+- ✅ Jenkins CI/CD pipeline (12 stages)
+- ✅ Kubernetes manifests (deployment, service, ingress, HPA)
+- ✅ Terraform AWS infrastructure (EKS, RDS, ElastiCache, S3, CloudFront)
+- ✅ Production Docker multi-stage build
+- ✅ Security implementation (IRSA, Secrets Manager, encryption)
+- ✅ Auto-scaling and high availability
+- ✅ Monitoring with CloudWatch
+
+**CI/CD Pipeline**:
+```
+1. Code Push (GitFlow) → 2. Jenkins Webhook → 3. Lint & Security Scan → 
+4. Run Tests → 5. Build Docker Image → 6. Push to ECR → 7. Trivy Scan → 
+8. Deploy to Staging (EKS) → 9. Integration Tests → 
+10. Deploy to Production (EKS with approval) → 11. Smoke Tests
+```
+
+---
+
+## 📊 Current Project Status
+
+| Phase | Status | Completion | Key Milestone |
+|-------|--------|------------|---------------|
+| Phase 0: Setup | ✅ Complete | 100% | Infrastructure ready |
+| Phase 1: Core API | ⏳ Not Started | 0% | Django project initialization |
+| Phase 2: Auth | ⏳ Not Started | 0% | JWT implementation |
+| Phase 3: Recommendations | ⏳ Not Started | 0% | Caching layer |
+| Phase 4: Documentation | ⏳ Not Started | 0% | Swagger integration |
+| Phase 5: Advanced Features | ⏳ Not Started | 0% | Performance optimization |
+| Phase 6: Deployment | ✅ Complete | 100% | AWS EKS Production Ready |
+
+**Last Updated**: February 1, 2026
+
+---
+
+## 🎯 Software Engineering Best Practices
+
+This capstone project demonstrates industry-standard best practices across all aspects of backend development.
+
+### **1. Code Quality & Standards**
+
+#### **Python & Django Best Practices**
+- **PEP 8 Compliance**: Consistent code formatting (enforced by Black)
+- **Type Hints**: Python 3.10+ type annotations for clarity
+- **Docstrings**: Comprehensive documentation for classes and functions
+- **DRY Principle**: Reusable components and utilities
+- **SOLID Principles**: Clean architecture and design patterns
+- **Django Patterns**: Fat models, thin views, service layers
+
+#### **Automated Code Quality Tools**
+```bash
+# Code formatting
+black .
+isort .
+
+# Linting
+flake8 .
+pylint movie_backend/
+
+# Type checking
+mypy movie_backend/
+
+# Pre-commit hooks run all checks automatically
+pre-commit run --all-files
+```
+
+---
+
+### **2. Version Control & Git Workflow**
+
+#### **Branching Strategy (GitFlow)**
+```
+main (production-ready code)
+  ↓
+develop (integration branch)
+  ↓
+feature/* (new features)
+hotfix/* (urgent production fixes)
+release/* (release preparation)
+```
+
+#### **Conventional Commits**
+```bash
+feat: add user authentication with JWT
+fix: resolve caching issue in trending endpoint
+docs: update API documentation for recommendations
+test: add integration tests for movie endpoints
+refactor: optimize database queries with select_related
+perf: implement Redis caching for trending movies
+chore: update dependencies to latest versions
+ci: add GitHub Actions workflow for testing
+```
+
+#### **Commit Guidelines**
+- Atomic commits (one logical change per commit)
+- Descriptive commit messages with context
+- Reference issue numbers when applicable
+- Sign commits for security (GPG)
+
+---
+
+### **3. Test-Driven Development (TDD)**
+
+#### **Testing Strategy**
+```
+Unit Tests (>90% coverage)
+  ├── Models & Serializers
+  ├── Services & Utilities
+  └── Business Logic
+
+Integration Tests
+  ├── API Endpoints
+  ├── Database Interactions
+  └── External API Integration
+
+Performance Tests
+  ├── Load Testing
+  ├── Caching Effectiveness
+  └── Query Performance
+```
+
+#### **Testing Tools & Framework**
+- **pytest**: Modern testing framework
+- **pytest-django**: Django-specific fixtures and utilities
+- **pytest-cov**: Code coverage reporting
+- **Factory Boy**: Test data generation
+- **Faker**: Realistic fake data
+- **pytest-benchmark**: Performance benchmarking
+
+#### **Test Coverage Goals**
+- Overall coverage: **>90%**
+- Critical paths: **100%**
+- Models & serializers: **100%**
+- Views & endpoints: **>95%**
+- Utilities: **>85%**
+
+#### **Running Tests**
+```bash
+# Run all tests with coverage
+pytest --cov=movie_backend --cov-report=html
+
+# Run specific test module
+pytest tests/test_movies.py
+
+# Run with verbose output
+pytest -v
+
+# Run performance tests
+pytest tests/performance/ --benchmark-only
+```
+
+---
+
+### **4. API Design Principles**
+
+#### **RESTful Design**
+- **Resource-based URLs**: `/api/movies/`, not `/api/get-movies/`
+- **HTTP Methods**: GET, POST, PUT, PATCH, DELETE used correctly
+- **Status Codes**: Proper HTTP status codes (200, 201, 400, 401, 404, 500)
+- **Versioning**: `/api/v1/` for backward compatibility
+- **Filtering & Pagination**: Query parameters for data control
+
+#### **API Response Structure**
+```json
+{
+  "status": "success",
+  "data": {
+    "movies": [...],
+    "pagination": {
+      "page": 1,
+      "page_size": 20,
+      "total_pages": 10,
+      "total_count": 200
+    }
+  },
+  "message": null
+}
+```
+
+#### **Error Response Structure**
+```json
+{
+  "status": "error",
+  "data": null,
+  "message": "Invalid authentication token",
+  "errors": {
+    "token": ["Token has expired"]
+  }
+}
+```
+
+---
+
+### **5. Database Optimization**
+
+#### **Query Optimization Techniques**
+- **select_related()**: For foreign key relationships (single JOIN)
+- **prefetch_related()**: For many-to-many and reverse foreign keys
+- **only()** / **defer()**: Load only required fields
+- **Database Indexing**: Index frequently queried fields
+- **Query Analysis**: Use Django Debug Toolbar
+
+#### **Example Optimized Query**
+```python
+# Bad (N+1 queries)
+movies = Movie.objects.all()
+for movie in movies:
+    print(movie.genre.name)  # Hits database each time
+
+# Good (2 queries)
+movies = Movie.objects.select_related('genre').all()
+for movie in movies:
+    print(movie.genre.name)  # No additional queries
+```
+
+---
+
+### **6. Security Best Practices**
+
+#### **Authentication & Authorization**
+- JWT tokens with short expiration (15 min access, 7 days refresh)
+- Token rotation on refresh
+- Secure password hashing (PBKDF2 with 320,000 iterations)
+- Rate limiting on sensitive endpoints
+
+#### **Data Protection**
+- **Environment Variables**: Never commit secrets to Git
+- **HTTPS Only**: All production traffic encrypted
+- **CORS Configuration**: Whitelist allowed origins
+- **Input Validation**: Sanitize all user input
+- **SQL Injection Prevention**: Use Django ORM (parameterized queries)
+
+#### **Security Headers**
+```python
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 31536000
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+```
+
+---
+
+### **7. Caching Strategy**
+
+#### **Cache Layers**
+```
+Client → CDN → Application Cache (Redis) → Database Cache → Database
+```
+
+#### **What to Cache**
+- **Trending Movies**: TTL = 1 hour (high read, low write)
+- **Movie Details**: TTL = 24 hours (rarely changes)
+- **User Recommendations**: TTL = 30 minutes (personalized)
+- **API Rate Limits**: TTL = 1 minute
+
+#### **Cache Invalidation**
+- Time-based expiration (TTL)
+- Event-based invalidation (on data update)
+- Manual cache clear for critical updates
+
+```python
+from django.core.cache import cache
+
+# Set cache
+cache.set('trending_movies', movies, timeout=3600)
+
+# Get from cache
+movies = cache.get('trending_movies')
+
+# Invalidate cache
+cache.delete('trending_movies')
+```
+
+---
+
+### **8. Documentation Standards**
+
+#### **Code Documentation**
+- Docstrings for all public functions and classes
+- Type hints for function parameters and returns
+- Inline comments for complex logic
+- README files for each major module
+
+#### **API Documentation**
+- OpenAPI 3.0 specification
+- Interactive Swagger UI at `/api/docs/`
+- Example requests and responses
+- Authentication requirements
+- Error codes and descriptions
+
+#### **Project Documentation**
+```
+docs/
+├── architecture/        # System design and architecture
+├── api/                # API endpoint documentation
+├── deployment/         # Deployment guides
+├── development/        # Setup and development guides
+└── phases/            # Phase-specific documentation
+```
+
+---
+
+### **9. CI/CD Pipeline**
+
+#### **Continuous Integration (GitHub Actions)**
+```yaml
+On Push/PR:
+  1. Checkout code
+  2. Setup Python environment
+  3. Install dependencies
+  4. Run linters (Black, Flake8, isort)
+  5. Run type checker (mypy)
+  6. Run tests with coverage
+  7. Build Docker image
+  8. Security scan (Bandit, Safety)
+  9. Upload coverage report
+```
+
+#### **Continuous Deployment**
+```yaml
+On main branch:
+  1. All CI checks pass
+  2. Build production Docker image
+  3. Push to container registry
+  4. Deploy to staging
+  5. Run integration tests
+  6. Manual approval gate
+  7. Deploy to production
+  8. Run smoke tests
+  9. Notify team
+```
+
+---
+
+### **10. Performance Optimization**
+
+#### **Response Time Targets**
+- API endpoints (cached): **< 200ms**
+- API endpoints (uncached): **< 1000ms**
+- Database queries: **< 100ms**
+- External API calls: **< 2000ms** (with timeout)
+
+#### **Optimization Techniques**
+- Redis caching for expensive operations
+- Database query optimization
+- Connection pooling
+- Async processing for heavy tasks (Celery)
+- Pagination for large datasets
+- Compression (gzip) for responses
+
+#### **Monitoring & Profiling**
+- Django Debug Toolbar (development)
+- Application Performance Monitoring (production)
+- Database query logging and analysis
+- Cache hit/miss ratio tracking
+
+---
 
 ---
 
 ## 📁 Repository Structure
+
 ```
 alx-project-nexus/
-├── README.md          # This file - comprehensive program documentation
-└── .git/              # Git version control
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                 # Continuous integration pipeline
+│       └── deploy.yml             # Deployment pipeline
+│
+├── docs/
+│   ├── architecture/              # System architecture diagrams
+│   ├── api/                      # API documentation
+│   ├── deployment/               # Deployment guides
+│   ├── development/              # Development setup guides
+│   └── phases/                   # Phase-specific documentation
+│
+├── movie_backend/                # Main Django project
+│   ├── __init__.py
+│   ├── settings/
+│   │   ├── __init__.py
+│   │   ├── base.py              # Base settings
+│   │   ├── development.py       # Development settings
+│   │   └── production.py        # Production settings
+│   ├── urls.py                  # Main URL configuration
+│   ├── wsgi.py                  # WSGI configuration
+│   └── asgi.py                  # ASGI configuration
+│
+├── apps/
+│   ├── movies/                  # Movies app
+│   │   ├── models.py           # Movie, Genre models
+│   │   ├── serializers.py      # DRF serializers
+│   │   ├── views.py            # API views
+│   │   ├── services.py         # Business logic
+│   │   ├── urls.py             # App URLs
+│   │   └── tests/              # App tests
+│   │
+│   ├── users/                   # User management app
+│   │   ├── models.py           # User, Profile models
+│   │   ├── serializers.py      
+│   │   ├── views.py            
+│   │   └── tests/              
+│   │
+│   └── recommendations/         # Recommendation engine app
+│       ├── models.py           
+│       ├── algorithms.py        # Recommendation algorithms
+│       ├── services.py          
+│       └── tests/               
+│
+├── tests/                       # Integration & E2E tests
+│   ├── integration/             
+│   ├── performance/            
+│   └── fixtures/               
+│
+├── scripts/                     # Utility scripts
+│   ├── setup_db.sh             
+│   ├── load_sample_data.py     
+│   └── deploy.sh               
+│
+├── docker/
+│   ├── Dockerfile.dev           # Development Dockerfile
+│   ├── Dockerfile.prod          # Production Dockerfile
+│   └── nginx/                   # Nginx configuration
+│       └── nginx.conf          
+│
+├── .env.example                 # Environment variables template
+├── .gitignore                   # Git ignore patterns
+├── .pre-commit-config.yaml      # Pre-commit hooks
+├── docker-compose.yml           # Docker services orchestration
+├── docker-compose.prod.yml      # Production compose file
+├── requirements.txt             # Python dependencies
+├── requirements-dev.txt         # Development dependencies
+├── pytest.ini                   # Pytest configuration
+├── setup.cfg                    # Tool configurations
+├── manage.py                    # Django management script
+└── README.md                    # This file
 ```
 
 ---
 
-## 🚀 Future Enhancements
-- Add code samples demonstrating key concepts
-- Include project implementations and case studies
-- Create detailed tutorials for complex topics
-- Document common debugging scenarios and solutions
+## 🚀 Getting Started
+
+### **Prerequisites**
+- Python 3.10+
+- Docker & Docker Compose
+- PostgreSQL 15+ (if running locally without Docker)
+- Redis 7.0+ (if running locally without Docker)
+- Git
+- TMDb API Key ([Get one here](https://www.themoviedb.org/settings/api))
+
+### **Quick Start with Docker (Recommended)**
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/alx-project-nexus.git
+   cd alx-project-nexus
+   ```
+
+2. **Create environment file**
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your TMDb API key and other secrets
+   ```
+
+3. **Start services with Docker Compose**
+   ```bash
+   docker-compose up -d
+   ```
+
+4. **Run migrations**
+   ```bash
+   docker-compose exec web python manage.py migrate
+   ```
+
+5. **Create superuser**
+   ```bash
+   docker-compose exec web python manage.py createsuperuser
+   ```
+
+6. **Access the application**
+   - API: http://localhost:8000/api/
+   - Swagger Docs: http://localhost:8000/api/docs/
+   - Admin: http://localhost:8000/admin/
+
+### **Local Development Setup (Without Docker)**
+
+1. **Activate fyp_env environment**
+   ```bash
+   # Activate existing fyp_env mamba environment
+   mamba activate fyp_env
+   
+   # Verify activation
+   echo $CONDA_DEFAULT_ENV  # Should output: fyp_env
+   ```
+
+2. **Install dependencies**
+   ```bash
+   # Install all dependencies in fyp_env
+   pip install -r requirements.txt
+   pip install -r requirements-dev.txt
+   ```
+
+3. **Setup PostgreSQL and Redis**
+   ```bash
+   # Ensure PostgreSQL and Redis are running
+   createdb movie_db
+   ```
+
+4. **Setup Git Hooks (first time only)**
+   ```bash
+   # Install GitFlow hooks
+   bash scripts/setup-git-hooks.sh
+   ```
+
+5. **Run migrations**
+   ```bash
+   python manage.py migrate
+   ```
+
+6. **Load sample data (optional)**
+   ```bash
+   python scripts/load_sample_data.py
+   ```
+
+7. **Run development server**
+   ```bash
+   python manage.py runserver
+   ```
+
+**Important**: Always activate `fyp_env` before working on this project:
+```bash
+mamba activate fyp_env
+```
+
+### **Running Tests**
+```bash
+# Ensure fyp_env is activated
+mamba activate fyp_env
+
+# With Docker
+docker-compose exec web pytest
+
+# Locally
+pytest
+
+# With coverage
+pytest --cov=movie_backend --cov-report=html
+```
+
+---
+
+## 🤝 Collaboration & Communication
+
+This capstone project emphasizes collaboration between **ProDev Backend** and **ProDev Frontend** learners for seamless full-stack integration.
+
+### **Looking for Frontend Developers!**
+If you're a **ProDev Frontend learner** working on a movie recommendation frontend, let's collaborate! I'm building a robust backend API that provides:
+- Movie data and recommendations
+- User authentication (JWT)
+- Comprehensive API documentation (Swagger)
+- Well-defined endpoints with proper error handling
+
+### **Connect & Collaborate**
+
+**Discord Channel**: `#ProDevProjectNexus`
+- Share ideas and technical discussions
+- Coordinate API contracts and integration
+- Get/provide help on implementation challenges
+- Stay updated with project announcements
+
+**What I'm Looking For**:
+- Frontend developers working on movie/entertainment apps
+- Collaboration on API design and requirements
+- Feedback on API usability and documentation
+- Integration testing partnerships
+
+**Communication Best Practices**:
+- Clear API contract definitions
+- Regular sync meetings for integration points
+- Shared Postman collections for API testing
+- Collaborative issue tracking
+
+---
+
+## 📚 Key Learning Outcomes
+
+Through this capstone project, I'm demonstrating proficiency in:
+
+✅ **Backend Development**
+- Building production-ready REST APIs with Django & DRF
+- Database design and optimization with PostgreSQL
+- External API integration (TMDb)
+
+✅ **Performance Engineering**
+- Implementing multi-layer caching strategies with Redis
+- Query optimization and database indexing
+- Load testing and performance benchmarking
+
+✅ **Security**
+- JWT-based authentication and authorization
+- Secure password handling and token management
+- Input validation and security best practices
+
+✅ **DevOps & Cloud Infrastructure**
+- Docker containerization with multi-stage builds
+- Kubernetes orchestration on AWS EKS
+- GitFlow branching model with automated hooks
+- Jenkins CI/CD pipelines (12 automated stages)
+- Infrastructure as Code with Terraform
+- AWS services (EKS, RDS, ElastiCache, S3, CloudFront, ECR)
+- Security best practices (IRSA, Secrets Manager, encryption)
+- Auto-scaling and high availability architecture
+
+✅ **Testing & Quality**
+- Test-driven development (TDD)
+- Comprehensive test coverage (unit, integration, performance)
+- Code quality tools and linting
+
+✅ **Documentation**
+- API documentation with OpenAPI/Swagger
+- Code documentation and docstrings
+- Comprehensive project documentation
+
+✅ **Professional Workflows**
+- Git workflows with conventional commits
+- Code reviews and collaboration
+- Agile/iterative development approach
 
 ---
 
@@ -232,8 +914,17 @@ This repository is for educational purposes as part of the ALX ProDev Backend En
 ## 👨‍💻 Author
 **ALX ProDev Backend Engineering Student**
 
-*Building robust, scalable backend solutions one API at a time!* 💪
+*Building production-grade, scalable backend solutions with industry best practices* 🚀
 
 ---
 
-**Last Updated**: February 2026
+## 🙏 Acknowledgments
+- **ALX Africa** for the comprehensive ProDev Backend Engineering Program
+- **The Movie Database (TMDb)** for providing the movie API
+- **ProDev Community** for collaboration and support
+
+---
+
+**Last Updated**: February 1, 2026  
+**Project Status**: Phase 0 - Complete | Infrastructure Ready  
+**Next Milestone**: Phase 1 - Django Core API Development

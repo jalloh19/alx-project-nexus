@@ -1,0 +1,113 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Django: Run Server",
+            "type": "shell",
+            "command": "python manage.py runserver 0.0.0.0:8000",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Django: Make Migrations",
+            "type": "shell",
+            "command": "python manage.py makemigrations",
+            "problemMatcher": []
+        },
+        {
+            "label": "Django: Migrate",
+            "type": "shell",
+            "command": "python manage.py migrate",
+            "problemMatcher": []
+        },
+        {
+            "label": "Django: Create Superuser",
+            "type": "shell",
+            "command": "python manage.py createsuperuser",
+            "problemMatcher": []
+        },
+        {
+            "label": "Django: Shell",
+            "type": "shell",
+            "command": "python manage.py shell",
+            "problemMatcher": []
+        },
+        {
+            "label": "Tests: Run All (pytest)",
+            "type": "shell",
+            "command": "pytest -v",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Tests: Run with Coverage",
+            "type": "shell",
+            "command": "pytest --cov=movie_backend --cov-report=html --cov-report=term",
+            "problemMatcher": []
+        },
+        {
+            "label": "Code Quality: Black",
+            "type": "shell",
+            "command": "black .",
+            "problemMatcher": []
+        },
+        {
+            "label": "Code Quality: isort",
+            "type": "shell",
+            "command": "isort .",
+            "problemMatcher": []
+        },
+        {
+            "label": "Code Quality: Flake8",
+            "type": "shell",
+            "command": "flake8 .",
+            "problemMatcher": []
+        },
+        {
+            "label": "Code Quality: Format All",
+            "type": "shell",
+            "command": "black . && isort .",
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker: Build",
+            "type": "shell",
+            "command": "docker-compose build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker: Up",
+            "type": "shell",
+            "command": "docker-compose up -d",
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker: Down",
+            "type": "shell",
+            "command": "docker-compose down",
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker: Logs",
+            "type": "shell",
+            "command": "docker-compose logs -f",
+            "problemMatcher": []
+        },
+        {
+            "label": "Git: Setup Hooks",
+            "type": "shell",
+            "command": "bash scripts/setup-git-hooks.sh",
+            "problemMatcher": []
+        }
+    ]
+}
