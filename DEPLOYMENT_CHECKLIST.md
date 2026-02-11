@@ -224,7 +224,7 @@ curl https://cli-assets.heroku.com/install.sh | sh
 
 # 2. Login and create app
 heroku login
-heroku create your-app-name
+heroku create alx-movie-api
 
 # 3. Add PostgreSQL
 heroku addons:create heroku-postgresql:mini

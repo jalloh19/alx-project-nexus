@@ -30,7 +30,7 @@ git --version     # Should show Git 2.x+
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/alx-project-nexus.git
+git clone https://github.com/jalloh19/alx-project-nexus.git
 cd alx-project-nexus
 ```
 

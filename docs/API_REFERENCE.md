@@ -21,7 +21,7 @@ Authorization: Bearer <access_token>
 ```json
 Request:
 {
-  "email": "user@example.com",
+  "email": "ikdiallotechie@gmail.com",
   "password": "SecurePass123!"
 }
 

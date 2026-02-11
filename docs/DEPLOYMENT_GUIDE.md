@@ -92,7 +92,7 @@ curl -X POST http://localhost:8000/api/v1/auth/users/ \
   -H "Content-Type: application/json" \
   -d '{
     "username": "testuser",
-    "email": "test@example.com",
+    "email": "ikdiallotechie@gmail.com",
     "password": "TestPass123",
     "password_confirm": "TestPass123"
   }'
@@ -185,7 +185,7 @@ python manage.py migrate
 # Register
 REGISTER_RESPONSE=$(curl -s -X POST http://localhost:8000/api/v1/auth/users/ \
   -H "Content-Type: application/json" \
-  -d '{"username":"demo","email":"demo@example.com","password":"DemoPass123","password_confirm":"DemoPass123"}')
+  -d '{"username":"demo","email":"ikdiallotechie@gmail.com","password":"DemoPass123","password_confirm":"DemoPass123"}')
 
 echo $REGISTER_RESPONSE | jq
 

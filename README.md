@@ -49,7 +49,7 @@ A production-ready REST API backend for movie recommendations, built with Django
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/alx-project-nexus.git
+git clone https://github.com/jalloh19/alx-project-nexus.git
 cd alx-project-nexus
 ```
 
@@ -504,8 +504,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Support
 
 For issues, questions, or contributions:
-- 📧 Email: your.email@example.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/alx-project-nexus/issues)
+- 📧 Email: ikdiallotechie@gmail.com
+- 🐛 Issues: [GitHub Issues](https://github.com/jalloh19/alx-project-nexus/issues)
 - 📖 Documentation: [API Docs](http://localhost:8000/api/docs/)
 
 ---
