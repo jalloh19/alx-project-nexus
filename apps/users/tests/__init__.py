@@ -35,12 +35,12 @@ class UserAPITests(APITestCase):
 
     def test_user_registration(self):
         """Test user registration endpoint."""
-        url = reverse('users:user-list')
+        url = '/api/v1/auth/'
         data = {
             'email': 'newuser@example.com',
             'username': 'newuser',
-            'password': 'newpass123',
-            'password_confirm': 'newpass123',
+            'password': 'newpass123Strong!',
+            'password_confirm': 'newpass123Strong!',
             'first_name': 'New',
             'last_name': 'User'
         }
