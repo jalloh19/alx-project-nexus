@@ -1,11 +1,11 @@
 """Recommendation views."""
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, mixins
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from drf_spectacular.utils import extend_schema, extend_schema_view
-from .models import Recommendation
-from .serializers import RecommendationSerializer
+from .models import Recommendation, RecommendationFeedback
+from .serializers import RecommendationSerializer, RecommendationFeedbackSerializer
 from .services.recommendation_engine import RecommendationEngine
 from apps.movies.serializers import MovieListSerializer
 
@@ -68,5 +68,37 @@ class RecommendationViewSet(viewsets.ReadOnlyModelViewSet):
         similar_movies = engine.get_similar_movies(movie_id, limit=10)
 
         serializer = MovieListSerializer(similar_movies, many=True)
+        return Response(serializer.data)
+
+    # ── Feedback actions ────────────────────────────────────────────
+    @extend_schema(
+        tags=['Recommendations'],
+        summary='Submit feedback on a recommendation',
+        request=RecommendationFeedbackSerializer,
+        responses={201: RecommendationFeedbackSerializer},
+    )
+    @action(detail=False, methods=['post'])
+    def feedback(self, request):
+        """Submit like / dislike / not_interested feedback."""
+        serializer = RecommendationFeedbackSerializer(
+            data=request.data, context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @extend_schema(
+        tags=['Recommendations'],
+        summary='Get all feedback from current user',
+        responses={200: RecommendationFeedbackSerializer(many=True)},
+    )
+    @action(detail=False, methods=['get'], url_path='feedback/list')
+    def feedback_list(self, request):
+        """List all feedback entries for the current user."""
+        feedbacks = RecommendationFeedback.objects.filter(
+            user=request.user
+        ).select_related('recommendation__movie').order_by('-created_at')
+
+        serializer = RecommendationFeedbackSerializer(feedbacks, many=True)
         return Response(serializer.data)
 

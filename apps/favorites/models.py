@@ -29,7 +29,7 @@ class Rating(TimeStampedModel):
     """User ratings for movies."""
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='user_ratings')
-    rating = models.FloatField()  # 0.5 to 5.0
+    rating = models.FloatField()  # 1 to 10
     review = models.TextField(blank=True)
 
     class Meta:

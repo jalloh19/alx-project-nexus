@@ -1,4 +1,5 @@
 """Movie views and viewsets."""
+import threading
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,7 +13,20 @@ from .serializers import (
     GenreSerializer,
     TMDbMovieSerializer
 )
-from .services.tmdb_service import tmdb_service
+from .services.tmdb_service import tmdb_service, TMDbService
+
+
+def _persist_in_background(results, detail=False):
+    """Fire-and-forget persistence so API response isn't slowed down."""
+    if detail:
+        thread = threading.Thread(
+            target=TMDbService.persist_tmdb_movie_detail, args=(results,), daemon=True
+        )
+    else:
+        thread = threading.Thread(
+            target=TMDbService.persist_tmdb_movies, args=(results,), daemon=True
+        )
+    thread.start()
 
 
 @extend_schema_view(
@@ -42,6 +56,9 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
 
         data = tmdb_service.get_trending_movies(time_window, page)
         if data and 'results' in data:
+            # Persist to DB in background so recommendation engine has data
+            _persist_in_background(data['results'])
+
             serializer = TMDbMovieSerializer(data['results'], many=True)
             return Response({
                 'results': serializer.data,
@@ -68,6 +85,8 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
 
         data = tmdb_service.search_movies(query, page)
         if data and 'results' in data:
+            _persist_in_background(data['results'])
+
             serializer = TMDbMovieSerializer(data['results'], many=True)
             return Response({
                 'results': serializer.data,
@@ -89,6 +108,8 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
         data = tmdb_service.get_popular_movies(page)
 
         if data and 'results' in data:
+            _persist_in_background(data['results'])
+
             serializer = TMDbMovieSerializer(data['results'], many=True)
             return Response({
                 'results': serializer.data,
@@ -110,6 +131,8 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
         data = tmdb_service.get_top_rated_movies(page)
 
         if data and 'results' in data:
+            _persist_in_background(data['results'])
+
             serializer = TMDbMovieSerializer(data['results'], many=True)
             return Response({
                 'results': serializer.data,
@@ -129,6 +152,7 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
         """Get movie details from TMDb."""
         data = tmdb_service.get_movie_details(tmdb_id)
         if data:
+            _persist_in_background(data, detail=True)
             return Response(data)
         return Response({'error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
 
