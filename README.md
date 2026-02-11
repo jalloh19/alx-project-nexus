@@ -9,7 +9,7 @@
 
 > **Production Status**: ✅ Production Ready
 > **Version**: 1.0.0
-> **Last Updated**: February 11, 2026
+> **Last Updated**: February 12, 2026
 
 ---
 
@@ -21,17 +21,22 @@ A production-ready REST API backend for movie recommendations, built with Django
 
 - **🔐 Authentication**: JWT-based auth with token refresh & blacklisting
 - **🎬 Movies**: Trending, popular, search, genres, and details from TMDb
-- **⭐ User Features**: Favorites, ratings with reviews, personalized recommendations
+- **🔄 TMDb Auto-Sync**: Movies auto-save to DB when browsed; bulk seed via `sync_tmdb` command
+- **⭐ User Features**: Favorites, ratings (1-10) with reviews
+- **🤖 Smart Recommendations**: Multi-signal engine (genre affinity, popularity, quality, recency, collaborative filtering) with diversity re-ranking
+- **👍 Feedback Loop**: Like / dislike / not-interested on recommendations feeds back into the engine
 - **📚 Documentation**: Interactive Swagger UI + OpenAPI 3.0 schema
 - **🏥 Monitoring**: Health check endpoints for production
-- **✅ Tested**: 5+ passing tests with comprehensive coverage
+- **✅ Tested**: 5 passing tests with comprehensive coverage
 - **🗄️ Database**: PostgreSQL with 21 optimized tables
+- **☁️ Deployed**: Live on Render (https://alx-project-nexus-m3is.onrender.com/)
 
 ### 📊 Project Statistics
 
-- **Total Endpoints**: 45+
+- **Total Endpoints**: 47+
 - **Apps**: 5 (users, movies, favorites, recommendations, core)
 - **Database Tables**: 21
+- **Movie Pool**: 250+ movies auto-synced from TMDb
 - **Test Coverage**: User auth, health checks, API endpoints
 - **Documentation**: Swagger UI + OpenAPI 3.0
 
@@ -86,7 +91,13 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-6. **Run development server**
+6. **Seed movie data from TMDb**
+```bash
+# Sync genres + trending/popular/top-rated movies into local DB
+python manage.py sync_tmdb --pages 5
+```
+
+7. **Run development server**
 ```bash
 python manage.py runserver
 ```
@@ -143,11 +154,13 @@ DELETE /api/v1/favorites/ratings/{id}/  # Delete rating
 GET    /api/v1/favorites/ratings/movie/{id}/  # Get movie rating
 ```
 
-#### Recommendations (3 endpoints)
+#### Recommendations (5 endpoints)
 ```
-GET    /api/v1/recommendations/         # Get recommendations
-POST   /api/v1/recommendations/refresh/ # Refresh recommendations
+GET    /api/v1/recommendations/              # Get recommendations
+POST   /api/v1/recommendations/refresh/      # Refresh recommendations
 GET    /api/v1/recommendations/similar/{id}/  # Similar movies
+POST   /api/v1/recommendations/feedback/      # Submit feedback (like/dislike/not_interested)
+GET    /api/v1/recommendations/feedback/list/  # List user feedback
 ```
 
 #### Health & Monitoring (3 endpoints)
@@ -193,18 +206,21 @@ alx-project-nexus/
 │   ├── movies/            # Movie data & TMDb
 │   │   ├── models.py      # Movie, Genre
 │   │   ├── serializers.py
-│   │   ├── views.py       # MovieViewSet, GenreViewSet
-│   │   └── services/      # TMDb integration
+│   │   ├── views.py       # MovieViewSet, GenreViewSet (auto-persist TMDb)
+│   │   ├── services/      # TMDb integration + DB persistence
+│   │   └── management/    # Management commands
+│   │       └── commands/
+│   │           └── sync_tmdb.py  # Bulk seed movies from TMDb
 │   │
 │   ├── favorites/         # User interactions
-│   │   ├── models.py      # Favorite, Rating
+│   │   ├── models.py      # Favorite, Rating (1-10 scale)
 │   │   ├── serializers.py
 │   │   └── views.py       # FavoriteViewSet, RatingViewSet
 │   │
-│   └── recommendations/   # ML recommendations
-│       ├── models.py      # Recommendation
-│       ├── views.py
-│       └── services/      # Recommendation engine
+│   └── recommendations/   # Smart recommendations
+│       ├── models.py      # Recommendation, RecommendationFeedback
+│       ├── views.py       # + feedback endpoints
+│       └── services/      # Multi-signal recommendation engine
 │
 └── docs/                  # Additional documentation
 ```
@@ -349,36 +365,33 @@ python manage.py migrate
 
 ## 🚢 Deployment
 
-### Production Checklist
+### Live Production URL
 
-- [ ] Set `DEBUG=False`
-- [ ] Configure `ALLOWED_HOSTS`
-- [ ] Use production database (PostgreSQL)
-- [ ] Set strong `SECRET_KEY`
-- [ ] Configure static files (Whitenoise/S3)
-- [ ] Setup HTTPS/SSL
-- [ ] Configure CORS for production frontend
-- [ ] Setup monitoring and logging
-- [ ] Configure email backend
-- [ ] Run security checks: `python manage.py check --deploy`
+> **https://alx-project-nexus-m3is.onrender.com/**
 
-### Docker Deployment (Optional)
+Deployed on **Render** with auto-deploy from `main` branch.
 
+### Render Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | PostgreSQL Internal URL from Render DB |
+| `DJANGO_SECRET_KEY` | Strong random secret |
+| `DEBUG` | `False` |
+| `ALLOWED_HOSTS` | `.onrender.com,localhost` |
+| `TMDB_API_KEY` | Your TMDb v3 API key |
+
+### Seed Production Database
+
+After deploy, run via Render Shell:
 ```bash
-# Build image
-docker build -t movie-api .
-
-# Run container
-docker run -p 8000:8000 --env-file .env movie-api
+python manage.py sync_tmdb --pages 5
 ```
 
 ### Production Server
 
 ```bash
-# Install production dependencies
-pip install gunicorn whitenoise
-
-# Run with Gunicorn
+# Gunicorn (configured in Procfile)
 gunicorn movie_backend.wsgi:application --bind 0.0.0.0:8000 --workers 4
 ```
 
@@ -447,7 +460,7 @@ Response (200):
 Request:
 {
   "movie": 1,
-  "rating": 4.5,
+  "rating": 9,
   "review": "Excellent sci-fi masterpiece!"
 }
 
@@ -460,7 +473,7 @@ Response (201):
     "title": "The Matrix",
     "poster_url": "..."
   },
-  "rating": 4.5,
+  "rating": 9,
   "review": "Excellent sci-fi masterpiece!",
   "created_at": "2026-02-11T10:30:00Z",
   "updated_at": "2026-02-11T10:30:00Z"
@@ -488,7 +501,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 👥 Authors
 
 **ALX Software Engineering Student**
-- GitHub: [@yourusername](https://github.com/yourusername)
+- GitHub: [@jalloh19](https://github.com/jalloh19)
 
 ---
 

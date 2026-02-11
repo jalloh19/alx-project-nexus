@@ -1,8 +1,8 @@
 # 🚀 Production Deployment Checklist
 
 **Project**: ALX Movie Recommendation API
-**Date**: February 11, 2026
-**Status**: Ready for Deployment
+**Date**: February 12, 2026
+**Status**: ✅ Deployed on Render
 
 ---
 
@@ -45,11 +45,11 @@
 - [x] Rate limiting ready (config available)
 
 ### API Functionality ✅
-- [x] 45+ endpoints implemented
+- [x] 47+ endpoints implemented
 - [x] Authentication endpoints (10)
 - [x] Movie endpoints (10)
 - [x] Favorites & ratings (12)
-- [x] Recommendations (3)
+- [x] Recommendations (5) — includes feedback endpoints
 - [x] Health checks (3)
 - [x] Pagination enabled
 - [x] Filtering and search working
@@ -125,7 +125,10 @@ python manage.py migrate
 # 3. Create superuser
 python manage.py createsuperuser
 
-# 4. Collect static files
+# 4. Seed movie data from TMDb
+python manage.py sync_tmdb --pages 5
+
+# 5. Collect static files
 python manage.py collectstatic --noinput
 ```
 
@@ -141,6 +144,31 @@ psql -U nexus_user nexus_db < backup_20260211.sql
 ---
 
 ## 🚀 Deployment Options
+
+### Option 0: Render (Current Deployment) ✅
+
+**Live URL**: https://alx-project-nexus-m3is.onrender.com/
+
+**Services**:
+- **Web Service**: `alx-project-nexus` (Python 3)
+- **Database**: `nexus-db` (PostgreSQL 18, Singapore region)
+
+**Render Environment Variables**:
+```bash
+DATABASE_URL=<internal-postgres-url-from-render>
+DJANGO_SECRET_KEY=<strong-random-secret>
+DEBUG=False
+ALLOWED_HOSTS=.onrender.com,localhost
+TMDB_API_KEY=<your-tmdb-api-key>
+DJANGO_SETTINGS_MODULE=movie_backend.settings
+```
+
+**Build Command**: `pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate`
+**Start Command**: `gunicorn movie_backend.wsgi:application --bind 0.0.0.0:$PORT`
+
+**Post-Deploy**: Run `python manage.py sync_tmdb --pages 5` from Render Shell to seed movies.
+
+---
 
 ### Option 1: Traditional VPS (DigitalOcean, Linode, etc.)
 
@@ -500,5 +528,5 @@ Before going live:
 
 **Ready to deploy!** 🚀
 
-**Last Updated**: February 11, 2026
-**Next Review**: Before production launch
+**Last Updated**: February 12, 2026
+**Next Review**: Ongoing — Render auto-deploys from `main`

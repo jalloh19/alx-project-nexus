@@ -140,7 +140,25 @@ Running migrations:
   (21 tables created successfully)
 ```
 
-### 7. Create Superuser (Optional but Recommended)
+### 7. Seed Movie Data from TMDb
+
+```bash
+# Bulk-sync genres + trending/popular/top_rated movies into your database
+python manage.py sync_tmdb --pages 5
+```
+
+**Expected output:**
+```
+Syncing genres from TMDb...
+Synced 19 genres.
+Fetching trending/day page 1...
+...
+Upserted 400 records, 251 unique movies in database.
+```
+
+> **Tip:** Movies also auto-save to the database whenever users browse trending, popular, or search endpoints.
+
+### 8. Create Superuser (Optional but Recommended)
 
 ```bash
 python manage.py createsuperuser
@@ -151,7 +169,7 @@ Enter:
 - Username: admin
 - Password: (choose a strong password)
 
-### 8. Run Development Server
+### 9. Run Development Server
 
 ```bash
 python manage.py runserver
@@ -237,7 +255,7 @@ curl -X POST http://localhost:8000/api/v1/auth/ \
 ### 1. Explore the API
 
 Visit the **Swagger UI** at http://localhost:8000/api/docs/ to:
-- View all 45+ endpoints
+- View all 47+ endpoints
 - Test endpoints interactively
 - See request/response schemas
 - Understand authentication flow
@@ -264,24 +282,14 @@ Ran 5 tests in 1.0s
 OK
 ```
 
-### 3. Load Sample Data (Optional)
+### 3. Load Sample Data
 
 ```bash
-# Create some test movies manually via Django shell
-python manage.py shell
+# Bulk-seed movies from TMDb (already done in step 7, but can be re-run)
+python manage.py sync_tmdb --pages 5
 
->>> from apps.movies.models import Movie, Genre
->>> genre = Genre.objects.create(tmdb_id=28, name="Action")
->>> movie = Movie.objects.create(
-...     tmdb_id=603,
-...     title="The Matrix",
-...     overview="A computer hacker learns...",
-...     release_date="1999-03-30",
-...     vote_average=8.7,
-...     popularity=78.5
-... )
->>> movie.genres.add(genre)
->>> exit()
+# Or sync genres only:
+python manage.py sync_tmdb --genres-only
 ```
 
 ### 4. Make Your First API Call
@@ -377,9 +385,9 @@ alx-project-nexus/
 ├── apps/                 # Django applications
 │   ├── core/            # Health checks, utilities
 │   ├── users/           # Authentication, profiles
-│   ├── movies/          # Movie data, TMDb integration
-│   ├── favorites/       # Favorites, ratings
-│   └── recommendations/ # ML recommendations
+│   ├── movies/          # Movie data, TMDb integration, sync_tmdb command
+│   ├── favorites/       # Favorites, ratings (1-10 scale)
+│   └── recommendations/ # Smart recommendations + feedback loop
 │
 └── docs/                # Documentation
 ```

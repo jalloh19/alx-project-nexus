@@ -244,7 +244,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 # TMDb API Configuration
-TMDB_API_KEY = os.environ.get('TMDB_API_KEY', '')
+TMDB_API_KEY = config('TMDB_API_KEY', default='')
 TMDB_BASE_URL = 'https://api.themoviedb.org/3'
 TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
 

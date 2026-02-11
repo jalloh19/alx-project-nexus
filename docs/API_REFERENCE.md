@@ -208,12 +208,12 @@ All ratings endpoints require authentication 🔒
 ```json
 {
   "movie": 1,
-  "rating": 4.5,
+  "rating": 9,
   "review": "Excellent movie! Highly recommended."
 }
 ```
 
-Note: Rating must be between 0.5 and 5.0 (increments of 0.5)
+Note: Rating must be between 1 and 10.
 
 ### Update Rating
 
@@ -221,7 +221,7 @@ Note: Rating must be between 0.5 and 5.0 (increments of 0.5)
 
 ```json
 {
-  "rating": 5.0,
+  "rating": 10,
   "review": "Absolutely perfect!"
 }
 ```
@@ -239,6 +239,16 @@ Note: Rating must be between 0.5 and 5.0 (increments of 0.5)
 ## 🤖 Recommendations
 
 All recommendations endpoints require authentication 🔒
+
+The recommendation engine uses **6 weighted signals**:
+- **Genre Affinity** (45%) — based on your favorites and ratings
+- **Quality Score** (20%) — TMDb vote average
+- **Popularity** (15%) — TMDb popularity metric
+- **Recency** (10%) — newer releases boosted
+- **Collaborative** (10%) — users-who-liked-X-also-liked-Y
+- **Diversity re-ranking** — genre spread in final results
+
+Disliked and not-interested movies are automatically excluded.
 
 ### Get Recommendations
 
@@ -263,6 +273,26 @@ Response:
 ### Get Similar Movies
 
 **GET** `/api/v1/recommendations/similar/{movie_id}/`
+
+### Submit Feedback
+
+**POST** `/api/v1/recommendations/feedback/` 🔒
+
+```json
+{
+  "recommendation": 1,
+  "feedback_type": "like",
+  "comment": "Great recommendation!"
+}
+```
+
+Valid `feedback_type` values: `like`, `dislike`, `not_interested`
+
+Feedback influences future recommendations — disliked/not-interested movies are excluded from the next refresh.
+
+### List User Feedback
+
+**GET** `/api/v1/recommendations/feedback/list/` 🔒
 
 ---
 
@@ -401,7 +431,7 @@ curl -X POST http://localhost:8000/api/v1/favorites/ratings/ \
   -H "Content-Type: application/json" \
   -d '{
     "movie": 1,
-    "rating": 4.5,
+    "rating": 9,
     "review": "Great movie!"
   }'
 ```

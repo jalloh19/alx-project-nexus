@@ -76,14 +76,16 @@ python manage.py createsuperuser
 # Password: (choose a strong password)
 ```
 
-### Step 5: Sync Genres from TMDb
+### Step 5: Seed Movie Data from TMDb
 ```bash
-# Start server first
-python manage.py runserver
+# Bulk-sync genres + trending/popular/top-rated movies
+python manage.py sync_tmdb --pages 5
 
-# In another terminal:
-curl -X POST http://localhost:8000/api/v1/movies/genres/sync/
+# Or sync genres only:
+python manage.py sync_tmdb --genres-only
 ```
+
+> Movies also auto-persist to the database whenever users browse TMDb endpoints.
 
 ### Step 6: Test the API
 ```bash
@@ -227,6 +229,14 @@ curl http://localhost:8000/api/v1/recommendations/ \
   -H "Authorization: Bearer $ACCESS_TOKEN" | jq
 ```
 
+### 5. Submit Recommendation Feedback
+```bash
+curl -X POST http://localhost:8000/api/v1/recommendations/feedback/ \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"recommendation": 1, "feedback_type": "like"}' | jq
+```
+
 ---
 
 ## Performance Optimization (Optional)
@@ -268,9 +278,9 @@ Your backend is now fully functional! Provide frontend developers with:
 1. ✅ **Test all endpoints manually**
 2. ✅ **Review Swagger documentation**
 3. ✅ **Share API docs with frontend team**
-4. 🔄 **Deploy to production (Railway/Render/AWS)**
+4. ✅ **Deployed to Render** — https://alx-project-nexus-m3is.onrender.com/
 5. 🔄 **Set up monitoring and logging**
-6. 🔄 **Configure HTTPS/SSL**
+6. 🔄 **Configure HTTPS/SSL** (Render provides free TLS)
 7. 🔄 **Set up automated backups**
 
 ---
