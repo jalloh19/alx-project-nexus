@@ -3,12 +3,16 @@ URL configuration for movie_backend project.
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularSwaggerView,
 )
 
 urlpatterns = [
+    # Root redirect to API docs
+    path('', RedirectView.as_view(url='/api/docs/', permanent=False), name='root'),
+
     # Django Admin
     path('admin/', admin.site.urls),
 
