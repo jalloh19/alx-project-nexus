@@ -106,13 +106,92 @@ The API will be available at `http://localhost:8000`
 
 ---
 
+## 🌐 Using the Live Deployed API
+
+> **Base URL**: `https://alx-project-nexus-m3is.onrender.com/`
+
+The API is live and publicly accessible — no local setup required to explore it!
+
+### Live Links
+
+| Resource | URL |
+|----------|-----|
+| **Swagger UI** (Interactive Docs) | [https://alx-project-nexus-m3is.onrender.com/api/docs/](https://alx-project-nexus-m3is.onrender.com/api/docs/) |
+| **Health Check** | [https://alx-project-nexus-m3is.onrender.com/health/](https://alx-project-nexus-m3is.onrender.com/health/) |
+| **OpenAPI Schema** | [https://alx-project-nexus-m3is.onrender.com/api/schema/](https://alx-project-nexus-m3is.onrender.com/api/schema/) |
+| **Admin Panel** | [https://alx-project-nexus-m3is.onrender.com/admin/](https://alx-project-nexus-m3is.onrender.com/admin/) |
+
+### Quick Test (No Setup Needed)
+
+```bash
+# 1. Check API health
+curl https://alx-project-nexus-m3is.onrender.com/health/
+
+# 2. Browse trending movies (public, no auth required)
+curl https://alx-project-nexus-m3is.onrender.com/api/v1/movies/trending/
+
+# 3. Search for movies
+curl "https://alx-project-nexus-m3is.onrender.com/api/v1/movies/search/?q=matrix"
+
+# 4. View genres
+curl https://alx-project-nexus-m3is.onrender.com/api/v1/movies/genres/
+```
+
+### Full Workflow (Register → Login → Use Features)
+
+```bash
+# Step 1: Register a new account
+curl -X POST https://alx-project-nexus-m3is.onrender.com/api/v1/auth/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "yourname@example.com",
+    "username": "yourname",
+    "password": "YourSecurePass123!",
+    "password_confirm": "YourSecurePass123!",
+    "first_name": "Your",
+    "last_name": "Name"
+  }'
+
+# Step 2: Login to get JWT tokens
+curl -X POST https://alx-project-nexus-m3is.onrender.com/api/v1/auth/login/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "yourname@example.com",
+    "password": "YourSecurePass123!"
+  }'
+# Copy the "access" token from the response
+
+# Step 3: Use authenticated endpoints (replace <TOKEN> with your access token)
+curl https://alx-project-nexus-m3is.onrender.com/api/v1/recommendations/ \
+  -H "Authorization: Bearer <TOKEN>"
+
+# Step 4: Add a movie to favorites (replace <MOVIE_ID> with an actual movie ID)
+curl -X POST https://alx-project-nexus-m3is.onrender.com/api/v1/favorites/ \
+  -H "Authorization: Bearer <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{"movie": <MOVIE_ID>}'
+
+# Step 5: Rate a movie
+curl -X POST https://alx-project-nexus-m3is.onrender.com/api/v1/favorites/ratings/ \
+  -H "Authorization: Bearer <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{"movie": <MOVIE_ID>, "rating": 9, "review": "Amazing movie!"}'
+```
+
+> **💡 Tip:** The easiest way to explore the API is through the [Swagger UI](https://alx-project-nexus-m3is.onrender.com/api/docs/) — it lets you try all endpoints interactively right in your browser!
+
+> **⚠️ Note:** The Render free tier may take ~30 seconds to wake up on the first request if the service has been idle.
+
+---
+
 ## 📚 API Documentation
 
 ### Interactive Documentation
 
-- **Swagger UI**: http://localhost:8000/api/docs/
-- **OpenAPI Schema**: http://localhost:8000/api/schema/
-- **Admin Panel**: http://localhost:8000/admin/
+- **Swagger UI (Live)**: https://alx-project-nexus-m3is.onrender.com/api/docs/
+- **Swagger UI (Local)**: http://localhost:8000/api/docs/
+- **OpenAPI Schema**: https://alx-project-nexus-m3is.onrender.com/api/schema/
+- **Admin Panel**: https://alx-project-nexus-m3is.onrender.com/admin/
 
 ### API Endpoints Overview
 
@@ -367,9 +446,16 @@ python manage.py migrate
 
 ### Live Production URL
 
-> **https://alx-project-nexus-m3is.onrender.com/**
+> **🔗 https://alx-project-nexus-m3is.onrender.com/**
 
 Deployed on **Render** with auto-deploy from `main` branch.
+
+| Live Resource | URL |
+|---------------|-----|
+| API Base | `https://alx-project-nexus-m3is.onrender.com/api/v1/` |
+| Swagger Docs | https://alx-project-nexus-m3is.onrender.com/api/docs/ |
+| Health Check | https://alx-project-nexus-m3is.onrender.com/health/ |
+| Admin Panel | https://alx-project-nexus-m3is.onrender.com/admin/ |
 
 ### Render Environment Variables
 
@@ -519,7 +605,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 For issues, questions, or contributions:
 - 📧 Email: ikdiallotechie@gmail.com
 - 🐛 Issues: [GitHub Issues](https://github.com/jalloh19/alx-project-nexus/issues)
-- 📖 Documentation: [API Docs](http://localhost:8000/api/docs/)
+- 📖 Documentation: [API Docs (Live)](https://alx-project-nexus-m3is.onrender.com/api/docs/)
 
 ---
 

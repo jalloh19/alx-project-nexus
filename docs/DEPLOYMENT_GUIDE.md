@@ -266,10 +266,12 @@ CREATE INDEX idx_movies_popularity ON movies(popularity DESC);
 ## Ready for Frontend Integration
 
 Your backend is now fully functional! Provide frontend developers with:
-1. **Base URL:** `http://localhost:8000/api/v1/`
-2. **Swagger Docs:** `http://localhost:8000/api/schema/swagger-ui/`
-3. **API Quick Reference:** `API_QUICK_REFERENCE.md`
-4. **Authentication:** JWT tokens in `Authorization: Bearer <token>` header
+1. **Base URL (Production):** `https://alx-project-nexus-m3is.onrender.com/api/v1/`
+2. **Base URL (Local):** `http://localhost:8000/api/v1/`
+3. **Swagger Docs (Live):** `https://alx-project-nexus-m3is.onrender.com/api/docs/`
+4. **Swagger Docs (Local):** `http://localhost:8000/api/docs/`
+5. **API Quick Reference:** `API_QUICK_REFERENCE.md`
+6. **Authentication:** JWT tokens in `Authorization: Bearer <token>` header
 
 ---
 
@@ -279,10 +281,13 @@ Your backend is now fully functional! Provide frontend developers with:
 2. ✅ **Review Swagger documentation**
 3. ✅ **Share API docs with frontend team**
 4. ✅ **Deployed to Render** — https://alx-project-nexus-m3is.onrender.com/
-5. 🔄 **Set up monitoring and logging**
-6. 🔄 **Configure HTTPS/SSL** (Render provides free TLS)
-7. 🔄 **Set up automated backups**
+5. ✅ **Live Swagger UI** — https://alx-project-nexus-m3is.onrender.com/api/docs/
+6. 🔄 **Set up monitoring and logging**
+7. 🔄 **Configure HTTPS/SSL** (Render provides free TLS)
+8. 🔄 **Set up automated backups**
 
 ---
 
 **🎉 Congratulations! Your movie recommendation backend is complete and ready to use!**
+
+**Live API:** https://alx-project-nexus-m3is.onrender.com/

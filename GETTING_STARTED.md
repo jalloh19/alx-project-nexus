@@ -6,6 +6,37 @@ This guide will help you get the Movie Recommendation API up and running in **un
 
 ---
 
+## 🌐 Try the Live API First (No Setup Required)
+
+The API is already deployed and publicly available! You can start exploring immediately:
+
+| Resource | URL |
+|----------|-----|
+| **Swagger UI** (Interactive Docs) | https://alx-project-nexus-m3is.onrender.com/api/docs/ |
+| **Health Check** | https://alx-project-nexus-m3is.onrender.com/health/ |
+| **API Base URL** | `https://alx-project-nexus-m3is.onrender.com/api/v1/` |
+
+**Quick test — try these in your terminal or browser:**
+
+```bash
+# Health check
+curl https://alx-project-nexus-m3is.onrender.com/health/
+
+# Browse trending movies (no login required)
+curl https://alx-project-nexus-m3is.onrender.com/api/v1/movies/trending/
+
+# Search for a movie
+curl "https://alx-project-nexus-m3is.onrender.com/api/v1/movies/search/?q=inception"
+```
+
+> **💡 Tip:** Open the [Swagger UI](https://alx-project-nexus-m3is.onrender.com/api/docs/) in your browser to interactively explore and test all 47+ endpoints — no tools or setup needed!
+
+> **⚠️ Note:** First request may take ~30 seconds if the Render service is waking up from idle.
+
+If you want to run the API locally for development, follow the steps below.
+
+---
+
 ## ✅ Prerequisites
 
 Before you begin, ensure you have:
